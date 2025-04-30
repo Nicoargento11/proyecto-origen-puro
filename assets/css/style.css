@@ -1,0 +1,80 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.titulo {
+  background-color: #92a8d1;
+  margin: 20px;
+}
+.parrafo {
+  background-color: green;
+  padding-top: 50px;
+  padding-left: 10px;
+  padding-bottom: 60px;
+  padding-right: 300px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* footer {
+  background-color: GoldenRod;
+  padding: 10px 20px 30px 40px;
+  margin: 10px 200px;
+} */
+
+:root {
+  /* Tonos base */
+  --bs-primary: #4b2e2b; /* Marrón fuerte, café tostado */
+  --bs-secondary: #a89f94; /* Beige grisáceo, elegante */
+  --bs-success: #c2a14d; /* Dorado suave, para destacar */
+  --bs-light: #faf9f7; /* Fondo claro principal */
+  --bs-dark: #1d1b1b; /* Texto oscuro */
+
+  /* Fondo y texto por defecto */
+  --bs-body-bg: #f5f0eb;
+  --bs-body-color: #1d1b1b;
+
+  /* Marrones adicionales */
+  --bs-brown-100: #ede0d4; /* Marrón muy claro, casi beige (para fondos) */
+  --bs-brown-200: #d6bfa7; /* Marrón suave (hover o secciones secundarias) */
+  --bs-brown-300: #b08968; /* Marrón medio, ideal para botones */
+  --bs-brown-400: #7f5539; /* Marrón oscuro intermedio */
+  --bs-brown-500: #5e4033; /* Marrón oscuro más fuerte (textos o fondo header) */
+  --bs-brown-600: #3b2f2f; /* Marrón profundo, para contrastes o detalles */
+
+  /* Otros tonos cálidos */
+  --bs-cream: #fff4e6; /* Crema muy suave, para cards o fondos claros */
+  --bs-caramel: #d7a86e; /* Caramelo claro, atractivo para botones */
+  --bs-chocolate: #381819; /* Casi negro con un toque de marrón, muy elegante */
+  --bs-beige: #e5d5c0; /* Beige rosado, perfecto para secciones suaves */
+}
+
+.hero-title {
+  background-color: #4b2e2b;
+}
+
+/* Animaciones */
+.animate__animated {
+  animation-duration: 1s;
+}
+
+/* Efecto hover para tarjetas de producto */
+.product-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Hero section responsive */
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+  .hero-content p.lead {
+    font-size: 1.1rem;
+  }
+}
