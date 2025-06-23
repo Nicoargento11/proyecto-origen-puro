@@ -78,3 +78,42 @@ html {
     font-size: 1.1rem;
   }
 }
+
+/* Compensación para navbar fija */
+.hero-section,
+.hero-productos,
+.hero-contact,
+.hero-commercial,
+.hero-about,
+.hero-video {
+  padding-top: 80px !important;
+}
+
+/* Ajustes específicos para hero de video */
+.hero-video {
+  height: calc(100vh - 80px) !important;
+  margin-top: 80px;
+}
+
+/* Compensación para secciones principales */
+.section:first-child,
+.py-5:first-child {
+  margin-top: 20px;
+}
+
+/* Responsive para dispositivos móviles */
+@media (max-width: 767.98px) {
+  .hero-section,
+  .hero-productos,
+  .hero-contact,
+  .hero-commercial,
+  .hero-about,
+  .hero-video {
+    padding-top: 90px !important;
+  }
+
+  .hero-video {
+    height: calc(100vh - 90px) !important;
+    margin-top: 90px;
+  }
+}

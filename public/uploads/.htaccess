@@ -1,0 +1,21 @@
+# Permitir acceso a imágenes
+<Files "*.jpg">
+    Allow from all
+</Files>
+<Files "*.jpeg">
+    Allow from all
+</Files>
+<Files "*.png">
+    Allow from all
+</Files>
+<Files "*.gif">
+    Allow from all
+</Files>
+<Files "*.webp">
+    Allow from all
+</Files>
+
+# Denegar acceso a otros tipos de archivos
+<FilesMatch "\.(php|html|js|css)$">
+    Deny from all
+</FilesMatch>

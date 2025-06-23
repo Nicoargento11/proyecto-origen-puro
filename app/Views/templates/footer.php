@@ -4,7 +4,7 @@
             <!-- Logo y descripción -->
             <div class="col-lg-4 mb-4">
                 <div class="footer-brand">
-                    <img src="assets/img/coffee.png" alt="Origen Puro" height="50" class="mb-3">
+                    <img src="<?= base_url('assets/img/coffee.png') ?>" alt="Origen Puro" height="50" class="mb-3">
                     <p class="footer-text">Café de especialidad tostado artesanalmente con pasión desde 2025.</p>
                     <!-- <div class="footer-newsletter mt-4">
                         <h4 class="h6 mb-3">Suscríbete a nuestro newsletter</h4>
@@ -163,13 +163,13 @@
         background-color: #E6D5C3;
     }
 
-    .form-control {
+    .footer-cafe .form-control {
         background-color: rgba(230, 213, 195, 0.1);
         border-color: rgba(212, 167, 98, 0.3);
         color: #E6D5C3;
     }
 
-    .form-control::placeholder {
+    .footer-cafe .form-control::placeholder {
         color: rgba(230, 213, 195, 0.7);
     }
 

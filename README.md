@@ -1,53 +1,88 @@
-# CodeIgniter 4 Framework
+# Sistema de Gestión de Café - CodeIgniter 4
 
-## What is CodeIgniter?
+## Descripción del Proyecto
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+Sistema completo de gestión para una tienda de café desarrollado con CodeIgniter 4. Incluye gestión de productos, categorías, usuarios, carrito de compras y panel de administración.
 
-This repository holds the distributable version of the framework.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+## Características Principales
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+### Frontend
+- 🏠 **Página principal** con presentación de productos destacados
+- 🛒 **Carrito de compras** con gestión de productos
+- 👤 **Sistema de autenticación** (registro/login)
+- 📱 **Diseño responsive** con Bootstrap 5
+- ☕ **Catálogo de productos** con filtros por categoría
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+### Panel de Administración
+- 📊 **Dashboard** con estadísticas del negocio
+- 👥 **Gestión de usuarios** con roles y permisos
+- ☕ **Gestión de productos** con imágenes y categorías
+- 📂 **Gestión de categorías** 
+- 📦 **Gestión de pedidos** con estados
+- 🔄 **APIs REST** para todas las operaciones CRUD
 
-## Important Change with index.php
+## Tecnologías Utilizadas
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+- **Backend**: CodeIgniter 4.6.0
+- **Frontend**: HTML5, CSS3, JavaScript (ES6), Bootstrap 5
+- **Base de Datos**: MySQL
+- **Iconos**: Font Awesome 6
+- **Servidor Web**: Apache (XAMPP)
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+## Estructura del Proyecto
 
-**Please** read the user guide for a better explanation of how CI4 works!
+```
+app/
+├── Controllers/
+│   ├── Admin/              # Controladores del panel de administración
+│   │   ├── CategoriasController.php
+│   │   ├── ProductosController.php
+│   │   ├── UsuariosController.php
+│   │   └── PedidosController.php
+│   ├── Auth.php            # Autenticación y registro
+│   ├── Carrito.php         # Gestión del carrito
+│   ├── Checkout.php        # Proceso de compra
+│   └── Home.php            # Páginas públicas
+├── Models/                 # Modelos de datos
+├── Views/                  # Vistas del frontend y admin
+├── Filters/                # Filtros de autenticación
+└── Traits/                 # Traits auxiliares
+```
 
-## Repository Management
+## Instalación
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+1. **Clonar el repositorio**
+```bash
+git clone [URL_DEL_REPOSITORIO]
+cd prueba-codeigniter
+```
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+2. **Configurar la base de datos**
+```bash
+# Crear base de datos MySQL
+CREATE DATABASE tienda_cafe;
+```
 
-## Contributing
+3. **Configurar archivo .env**
+```bash
+cp .env.example .env
+# Editar .env con tus credenciales de base de datos
+```
 
-We welcome contributions from the community.
+4. **Inicializar la base de datos**
+```bash
+# Visitar: http://localhost/pruebacodeneigter/init-db
+# Esto creará las tablas y datos iniciales
+```
 
-Please read the [*Contributing to CodeIgniter*](https://github.com/codeigniter4/CodeIgniter4/blob/develop/CONTRIBUTING.md) section in the development repository.
+## Usuario Administrador
+Después de ejecutar `/init-db`, se crea un usuario administrador:
+- **Email**: admin@ejemplo.com
+- **Contraseña**: admin123
 
-## Server Requirements
+## Licencia
 
-PHP version 8.1 or higher is required, with the following extensions installed:
-
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-
-> [!WARNING]
+Este proyecto está bajo la Licencia MIT.
 > - The end of life date for PHP 7.4 was November 28, 2022.
 > - The end of life date for PHP 8.0 was November 26, 2023.
 > - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.

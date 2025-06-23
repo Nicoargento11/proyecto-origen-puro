@@ -1,0 +1,52 @@
+# CodeIgniter 4 specific files
+/vendor/
+/node_modules/
+
+# Logs
+/writable/logs/*
+!/writable/logs/index.html
+
+# Cache
+/writable/cache/*
+!/writable/cache/index.html
+
+# Session
+/writable/session/*
+!/writable/session/index.html
+
+# Uploads
+/writable/uploads/*
+!/writable/uploads/index.html
+
+# Database
+/writable/database/*
+!/writable/database/index.html
+
+# Environment file
+.env
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+
+# Composer
+composer.phar
+
+# npm
+npm-debug.log*
+
+# Specific project uploads (preservar la estructura pero no el contenido)
+/public/uploads/productos/*
+!/public/uploads/productos/.gitkeep
+/public/uploads/usuarios/*
+!/public/uploads/usuarios/.gitkeep

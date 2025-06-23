@@ -1,3 +1,4 @@
+<?php helper('text'); ?>
 <style>
   /* Estilo general "seamless" */
 
@@ -69,34 +70,17 @@
     color: var(--cafe-oscuro);
     font-weight: 600;
   }
-</style>
 
-
-
-<!-- Hero con Video -->
-<!-- Hero con Imagen -->
-<section class="hero-image">
-  <div class="hero-background">
-    <img src="assets/img/background-coffee-3.jpg" alt="Café de especialidad" class="w-100 h-100 object-fit-cover">
-  </div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content text-center text-white container">
-    <h1 class="display-3 fw-bold mb-4 animate__animated animate__fadeInDown">Descubre el Alma del Café</h1>
-    <p class="lead fs-2 mb-5 animate__animated animate__fadeInUp animate__delay-1s">Directo de las montañas a tu taza</p>
-    <a href="#cafes" class="btn btn-outline-light btn-lg px-4 py-3 fw-bold rounded-pill animate__animated animate__fadeIn animate__delay-2s">
-      <i class="fas fa-coffee me-2"></i> Explorar Cafés
-    </a>
-  </div>
-</section>
-
-<style>
-  /* Estilos para el hero con imagen */
   .hero-image {
     height: 100vh;
     position: relative;
     overflow: hidden;
     clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
     margin-bottom: -10vh;
+    margin-top: -76px;
+    /* Compensar altura de navbar fija */
+    padding-top: 76px;
+    /* Mantener contenido visible */
   }
 
   .hero-background {
@@ -132,6 +116,25 @@
   }
 </style>
 
+
+
+<!-- Hero con Video -->
+<!-- Hero con Imagen -->
+<section class="hero-image">
+  <div class="hero-background">
+    <img src="<?= base_url('assets/img/background-coffee-3.jpg') ?>" alt="Café de especialidad" class="w-100 h-100 object-fit-cover">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content text-center text-white container">
+    <h1 class="display-3 fw-bold mb-4">Descubre el Alma del Café</h1>
+    <p class="lead fs-2 mb-5">Directo de las montañas a tu taza</p>
+    <a href="#cafes" class="btn btn-outline-light btn-lg px-4 py-3 fw-bold rounded-pill">
+      <i class="fas fa-coffee me-2"></i> Explorar Cafés
+    </a>
+  </div>
+</section>
+
+
 <!-- Sección Orígenes -->
 <section id="origenes" class="" style="background: linear-gradient(to right, #F5F0E6, #E6D5C3); padding-top: 15vh; padding-bottom: 10vh;">
   <div class="container">
@@ -149,7 +152,7 @@
 
       </div>
       <div class="col-lg-6">
-        <img src="assets/img/origenes-cafe.jpg" alt="Finca de café" class="img-fluid rounded-4 shadow" loading="lazy" style="border: 8px solid white; box-shadow: 0 10px 30px rgba(74, 46, 29, 0.2);">
+        <img src="<?= base_url('assets/img/origenes-cafe.jpg') ?>" alt="Finca de café" class="img-fluid rounded-4 shadow" loading="lazy" style="border: 8px solid white; box-shadow: 0 10px 30px rgba(74, 46, 29, 0.2);">
       </div>
     </div>
   </div>
@@ -162,81 +165,75 @@
       <h2 class="display-4 fw-bold mb-3" style="color: #E6D5C3;">Nuestra Selección</h2>
       <p class="lead mx-auto" style="color: #D4A762; max-width: 600px;">Descubre perfiles únicos de nuestras fincas asociadas</p>
     </div>
-
     <div class="row g-4">
-      <!-- Café 1 -->
-      <div class="col-md-6 col-lg-3">
-        <div class="card h-100 border-0 overflow-hidden" style="background-color: rgba(230, 213, 195, 0.1); backdrop-filter: blur(5px); transition: all 0.3s;">
-          <div class="overflow-hidden" style="height: 200px;">
-            <img src="assets/img/cafe-etiopia.jpg" class="card-img-top w-100 h-100 object-cover" alt="Etiopía" style="transition: transform 0.5s;">
-          </div>
-          <div class="card-body">
-            <h5 class="card-title" style="color: #F5F0E6;">Etiopía Yirgacheffe</h5>
-            <p class="small mb-1" style="color: #D4A762;"><i class="fas fa-mountain me-2"></i>1,850 msnm</p>
-            <p class="mb-3" style="color: #E6D5C3;">Notas: Bergamota, jazmín y melocotón.</p>
-            <!-- <a href="#" class="btn btn-sm w-100" style="background-color: #D4A762; color: #4A2E1D; font-weight: 600;">
-              Añadir al carrito
-            </a> -->
-          </div>
-        </div>
-      </div>
+      <?php if (!empty($productos_destacados)): ?>
+        <?php foreach ($productos_destacados as $producto): ?>
+          <div class="col-md-6 col-lg-3">
+            <div class="card h-100 border-0 overflow-hidden" style="background-color: rgba(230, 213, 195, 0.1); backdrop-filter: blur(5px); transition: all 0.3s;">
+              <div class="overflow-hidden" style="height: 200px;">
+                <?php if ($producto['imagen_producto']): ?>
+                  <img src="<?= base_url("public/uploads/productos/" . $producto['imagen_producto']) ?>"
+                    class="card-img-top w-100 h-100"
+                    alt="<?= esc($producto['nombre']) ?>"
+                    style="object-fit: cover; transition: transform 0.5s;">
+                <?php else: ?>
+                  <div class="card-img-top w-100 h-100 d-flex align-items-center justify-content-center bg-light" style="transition: transform 0.5s;">
+                    <i class="fas fa-coffee fa-3x text-muted"></i>
+                  </div>
+                <?php endif; ?>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title" style="color: #F5F0E6;"><?= esc($producto['nombre']) ?></h5>
 
-      <!-- Café 2 -->
-      <div class="col-md-6 col-lg-3">
-        <div class="card h-100 border-0 overflow-hidden" style="background-color: rgba(230, 213, 195, 0.1); backdrop-filter: blur(5px); transition: all 0.3s;">
-          <div class="overflow-hidden" style="height: 200px;">
-            <img src="assets/img/cafe-colombia.jpg" class="card-img-top w-100 h-100 object-cover" alt="Colombia" style="transition: transform 0.5s;">
-          </div>
-          <div class="card-body">
-            <h5 class="card-title" style="color: #F5F0E6;">Colombia Huila</h5>
-            <p class="small mb-1" style="color: #D4A762;"><i class="fas fa-mountain me-2"></i>1,600 msnm</p>
-            <p class="mb-3" style="color: #E6D5C3;">Notas: Chocolate negro y caramelo.</p>
-            <!-- <a href="#" class="btn btn-sm w-100" style="background-color: #D4A762; color: #4A2E1D; font-weight: 600;">
-              Añadir al carrito
-            </a> -->
-          </div>
-        </div>
-      </div>
+                <?php if ($producto['origen']): ?>
+                  <p class="small mb-1" style="color: #D4A762;">
+                    <i class="fas fa-map-marker-alt me-2"></i><?= esc($producto['origen']) ?>
+                  </p>
+                <?php endif; ?>
 
-      <!-- Café 3 -->
-      <div class="col-md-6 col-lg-3">
-        <div class="card h-100 border-0 overflow-hidden" style="background-color: rgba(230, 213, 195, 0.1); backdrop-filter: blur(5px); transition: all 0.3s;">
-          <div class="overflow-hidden" style="height: 200px;">
-            <img src="assets/img/cafe-brasil.jpg" class="card-img-top w-100 h-100 object-cover" alt="Brasil" style="transition: transform 0.5s;">
-          </div>
-          <div class="card-body">
-            <h5 class="card-title" style="color: #F5F0E6;">Brasil Cerrado</h5>
-            <p class="small mb-1" style="color: #D4A762;"><i class="fas fa-mountain me-2"></i>1,200 msnm</p>
-            <p class="mb-3" style="color: #E6D5C3;">Notas: Avellana y azúcar moreno.</p>
-            <!-- <a href="#" class="btn btn-sm w-100" style="background-color: #D4A762; color: #4A2E1D; font-weight: 600;">
-              Añadir al carrito
-            </a> -->
-          </div>
-        </div>
-      </div>
+                <?php if ($producto['notas_cata']): ?>
+                  <p class="mb-2" style="color: #E6D5C3; font-size: 0.9em;">
+                    <?= substr(esc($producto['notas_cata']), 0, 50) . (strlen($producto['notas_cata']) > 50 ? '...' : '') ?>
+                  </p>
+                <?php endif; ?>
 
-      <!-- Café 4 -->
-      <div class="col-md-6 col-lg-3">
-        <div class="card h-100 border-0 overflow-hidden" style="background-color: rgba(230, 213, 195, 0.1); backdrop-filter: blur(5px); transition: all 0.3s;">
-          <div class="overflow-hidden" style="height: 200px;">
-            <img src="assets/img/cafe-blend.jpg" class="card-img-top w-100 h-100 object-cover" alt="Blend" style="transition: transform 0.5s;">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="fw-bold" style="color: #D4A762;">$<?= number_format($producto['precio'], 2) ?></span>
+                  <?php if ($producto['categoria_nombre']): ?>
+                    <small style="color: #E6D5C3;"><?= esc($producto['categoria_nombre']) ?></small>
+                  <?php endif; ?>
+                </div>
+
+                <div class="d-grid gap-2">
+                  <button class="btn btn-sm agregar-carrito-home"
+                    data-producto-id="<?= $producto['id'] ?>"
+                    data-producto-nombre="<?= esc($producto['nombre']) ?>"
+                    data-producto-precio="<?= $producto['precio'] ?>"
+                    style="background-color: #D4A762; color: #4A2E1D; font-weight: 600;"
+                    <?= $producto['stock'] <= 0 ? 'disabled' : '' ?>>
+                    <?= $producto['stock'] <= 0 ? 'Sin Stock' : 'Añadir al carrito' ?>
+                  </button>
+                  <a href="<?= base_url('productos/' . $producto['id']) ?>"
+                    class="btn btn-sm btn-outline-light">
+                    Ver detalles
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="card-body">
-            <h5 class="card-title" style="color: #F5F0E6;">Blend Especial</h5>
-            <p class="small mb-1" style="color: #D4A762;"><i class="fas fa-blend me-2"></i>Mezcla exclusiva</p>
-            <p class="mb-3" style="color: #E6D5C3;">Notas: Frutos rojos y especias dulces.</p>
-            <!-- <a href="#" class="btn btn-sm w-100" style="background-color: #D4A762; color: #4A2E1D; font-weight: 600;">
-              Añadir al carrito
-            </a> -->
-          </div>
+        <?php endforeach; ?>
+      <?php else: ?>
+        <!-- Productos de ejemplo si no hay productos destacados -->
+        <div class="col-12 text-center">
+          <p class="text-muted">No hay productos destacados disponibles.</p>
+          <a href="<?= base_url('productos') ?>" class="btn btn-outline-light">Ver todos los productos</a>
         </div>
-      </div>
+      <?php endif; ?>
     </div>
-
     <div class="text-center mt-5">
-      <!-- <a href="<?= base_url('catalogo') ?>" class="btn btn-lg px-4 py-2 fw-bold rounded-pill" style="background-color: transparent; border: 2px solid #E6D5C3; color: #E6D5C3;">
+      <a href="<?= base_url('productos') ?>" class="btn btn-lg px-4 py-2 fw-bold rounded-pill" style="background-color: transparent; border: 2px solid #E6D5C3; color: #E6D5C3;">
         Ver toda la selección <i class="fas fa-arrow-right ms-2"></i>
-      </a> -->
+      </a>
     </div>
   </div>
 </section>
@@ -245,9 +242,8 @@
 <!-- <section id="experiencia" class="py-6" style="background: linear-gradient(to left, #F5F0E6, #E6D5C3); padding: 10vh">
   <div class="container">
     <div class="row align-items-center">
-      <div class="col-lg-6 order-lg-2 mb-5 mb-lg-0">
-        <div class="position-relative">
-          <img src="assets/img/experiencia-cafe.jpg" alt="Experiencia café" class="img-fluid rounded-4 shadow" loading="lazy" style="border: 8px solid white; box-shadow: 0 10px 30px rgba(74, 46, 29, 0.2);">
+      <div class="col-lg-6 order-lg-2 mb-5 mb-lg-0">        <div class="position-relative">
+          <img src="<?= base_url('assets/img/experiencia-cafe.jpg') ?>" alt="Experiencia café" class="img-fluid rounded-4 shadow" loading="lazy" style="border: 8px solid white; box-shadow: 0 10px 30px rgba(74, 46, 29, 0.2);">
           <div class="position-absolute top-0 start-0 w-100 h-100" style="background: rgba(212, 167, 98, 0.1); border-radius: 16px; z-index: 0;"></div>
         </div>
       </div>
@@ -299,7 +295,6 @@
 
 
 <!-- Scripts -->
-<script src="<?= base_url('assets/js/bootstrap.bundle.min.js') ?>"></script>
 <script>
   // Navbar cambia al hacer scroll
   window.addEventListener('scroll', function() {
@@ -309,5 +304,96 @@
     } else {
       navbar.classList.remove('scrolled');
     }
+  });
+
+  // Funcionalidad para agregar al carrito desde la home
+  document.addEventListener('DOMContentLoaded', function() {
+    const botonesCarrito = document.querySelectorAll('.agregar-carrito-home');
+
+    botonesCarrito.forEach(boton => {
+      boton.addEventListener('click', function() {
+        const productoId = this.dataset.productoId;
+        const productoNombre = this.dataset.productoNombre;
+        const productoPrice = this.dataset.productoPrecio;
+
+        // Mostrar indicador de carga
+        const originalText = this.innerHTML;
+        this.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Agregando...';
+        this.disabled = true;
+
+        // Realizar petición AJAX
+        fetch('<?= base_url('carrito/agregar') ?>', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `producto_id=${productoId}&cantidad=1`
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              // Mostrar mensaje de éxito
+              this.innerHTML = '<i class="fas fa-check me-1"></i>¡Agregado!';
+              this.style.backgroundColor = '#28a745';
+              // Actualizar contador del carrito
+              if (typeof actualizarContadorCarrito === 'function') {
+                actualizarContadorCarrito();
+              }
+
+              // Mostrar toast de confirmación
+              const toast = document.createElement('div');
+              toast.className = 'position-fixed top-0 end-0 p-3';
+              toast.style.zIndex = '9999';
+              toast.innerHTML = `
+              <div class="toast show" role="alert">
+                <div class="toast-header">
+                  <i class="fas fa-shopping-cart text-success me-2"></i>
+                  <strong class="me-auto">Producto agregado</strong>
+                </div>
+                <div class="toast-body">
+                  ${productoNombre} se agregó al carrito
+                  <div class="mt-2">
+                    <a href="<?= base_url('carrito') ?>" class="btn btn-sm btn-success me-2">Ver carrito</a>
+                    <button class="btn btn-sm btn-secondary" onclick="this.closest('.position-fixed').remove()">Continuar</button>
+                  </div>
+                </div>
+              </div>
+            `;
+              document.body.appendChild(toast);
+
+              // Eliminar toast después de 5 segundos
+              setTimeout(() => {
+                if (toast.parentNode) {
+                  toast.remove();
+                }
+              }, 5000);
+
+              // Restaurar botón después de 2 segundos
+              setTimeout(() => {
+                this.innerHTML = originalText;
+                this.style.backgroundColor = '#D4A762';
+                this.disabled = false;
+              }, 2000);
+
+            } else {
+              // Mostrar error
+              alert(data.message || 'Error al agregar el producto al carrito');
+              this.innerHTML = originalText;
+              this.disabled = false;
+
+              // Si necesita login, redirigir
+              if (data.redirect) {
+                window.location.href = data.redirect;
+              }
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert('Error al agregar el producto al carrito');
+            this.innerHTML = originalText;
+            this.disabled = false;
+          });
+      });
+    });
   });
 </script>

@@ -6,10 +6,19 @@ class Home extends BaseController
 {
     public function index(): string
     {
+        // Obtener productos destacados para mostrar en la home
+        $productoModel = new \App\Models\ProductoModel();
+        $productos = $productoModel->obtenerProductosDestacados(4);
+
+        $data = [
+            'productos_destacados' => $productos
+        ];
+
         return view('templates/header')
-            . view('principal.php')
+            . view('principal', $data)
             . view('templates/footer');
     }
+
 
     public function about(): string
     {
@@ -20,25 +29,20 @@ class Home extends BaseController
                 ['name' => 'Luciano Villordo', 'role' => 'Fundador', 'bio' => 'Experta en métodos de extracción.']
             ]
         ];
-        return view('templates/header')
-            . view("about.php", $data)
-            . view('templates/footer');
+        return view("about.php", $data);
     }
 
     public function contacto(): string
     {
-        return view('templates/header')
-            . view("contacto.php")
-            . view('templates/footer');
-        // . view('templates/footer');
+        return view("contacto.php");
     }
 
     public function comercializacion(): string
     {
-
-        return view('templates/header')
-            . view("comercializacion.php")
-            . view('templates/footer');
+        $data = [
+            'title' => 'Comercialización | Tienda de Café'
+        ];
+        return view("comercializacion.php", $data);
     }
 
     public function enviarContacto()
@@ -168,12 +172,27 @@ class Home extends BaseController
             . view("terminos.php", $data)
             . view('templates/footer');
     }
-    // public function catalogo(): string
-    // {
-    //     return view("");
-    // }
-    // public function consultas(): string
-    // {
-    //     return view("");
-    // }
+
+    // Método de prueba para verificar que el sistema funciona
+    public function testCheckout()
+    {
+        if (!session('logged_in')) {
+            return redirect()->to('/login')->with('error', 'Debes iniciar sesión para acceder al checkout');
+        }
+
+        $data = [
+            'titulo' => 'Test del Sistema de Checkout',
+            'mensaje' => 'El sistema de checkout está funcionando correctamente',
+            'enlaces' => [
+                'Carrito' => base_url('carrito'),
+                'Checkout' => base_url('checkout'),
+                'Mis Pedidos' => base_url('mis-pedidos'),
+                'Inicializar Métodos de Pago' => base_url('checkout/init-metodos-pago')
+            ]
+        ];
+
+        return view('templates/header')
+            . view('test_checkout', $data)
+            . view('templates/footer');
+    }
 }
