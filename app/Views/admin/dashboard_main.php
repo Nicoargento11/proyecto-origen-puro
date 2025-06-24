@@ -118,7 +118,7 @@
         border-radius: 8px;
         font-weight: 600;
         transition: all 0.3s ease;
-        margin-left: 10px;
+        margin-bottom: 0.5rem;
     }
 
     .btn-admin-secondary:hover {
@@ -131,15 +131,50 @@
     .quick-actions {
         margin-top: 2rem;
     }
+
+    .dashboard-icon {
+        font-size: 8rem;
+        color: var(--dorado);
+        opacity: 0.3;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        .admin-container {
+            padding: 1rem 0;
+        }
+
+        .admin-header {
+            padding: 1.5rem 0;
+        }
+
+        .welcome-section {
+            padding: 1.5rem;
+        }
+
+        .dashboard-icon {
+            font-size: 4rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .dashboard-icon {
+            font-size: 3rem;
+        }
+
+        .btn-admin-primary,
+        .btn-admin-secondary {
+            font-size: 0.9rem;
+        }
+    }
 </style>
 
 <div class="admin-container">
-    <div class="container">
-        <!-- Header de Bienvenida -->
+    <div class="container"> <!-- Header de Bienvenida -->
         <div class="admin-header">
             <div class="container">
                 <div class="row align-items-center">
-                    <div class="col-md-8">
+                    <div class="col-lg-8 col-md-12 text-center text-lg-start">
                         <h1 class="display-5 fw-bold mb-2">
                             <i class="fas fa-shield-alt me-3"></i>Panel de Administración
                         </h1>
@@ -147,8 +182,8 @@
                             Bienvenido, <?= $user['nombre'] ?? 'Administrador' ?>
                         </p>
                     </div>
-                    <div class="col-md-4 text-md-end">
-                        <div class="d-flex flex-column align-items-md-end">
+                    <div class="col-lg-4 col-md-12 text-center text-lg-end mt-3 mt-lg-0">
+                        <div class="d-flex flex-column align-items-center align-items-lg-end">
                             <span class="badge bg-success mb-2 px-3 py-2">
                                 <i class="fas fa-circle me-1"></i>Sistema En Línea
                             </span>
@@ -207,30 +242,40 @@
         </div> <!-- Welcome & Quick Actions -->
         <div class="welcome-section">
             <div class="row align-items-center">
-                <div class="col-md-8">
+                <div class="col-lg-8 col-md-12">
                     <h3 class="mb-3" style="color: var(--cafe-oscuro);">
                         <i class="fas fa-rocket me-2"></i>Panel de Control
                     </h3>
-                    <p class="text-muted mb-0">
+                    <p class="text-muted mb-4">
                         Desde aquí puedes gestionar usuarios, productos, pedidos y ver estadísticas importantes de tu tienda de café.
                     </p>
                     <div class="quick-actions">
-                        <a href="<?= base_url('admin/usuarios') ?>" class="btn btn-admin-primary">
-                            <i class="fas fa-users me-2"></i>Gestionar Usuarios
-                        </a>
-                        <a href="<?= base_url('admin/productos') ?>" class="btn btn-admin-secondary">
-                            <i class="fas fa-coffee me-2"></i>Ver Productos
-                        </a>
-                        <a href="<?= base_url('admin/categorias') ?>" class="btn btn-admin-secondary">
-                            <i class="fas fa-tags me-2"></i>Ver Categorías
-                        </a>
-                        <a href="<?= base_url('admin/pedidos') ?>" class="btn btn-admin-secondary">
-                            <i class="fas fa-clipboard-list me-2"></i>Ver Pedidos
-                        </a>
+                        <div class="row g-2">
+                            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                                <a href="<?= base_url('admin/usuarios') ?>" class="btn btn-admin-primary w-100">
+                                    <i class="fas fa-users me-2"></i>Gestionar Usuarios
+                                </a>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                                <a href="<?= base_url('admin/productos') ?>" class="btn btn-admin-secondary w-100">
+                                    <i class="fas fa-coffee me-2"></i>Ver Productos
+                                </a>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                                <a href="<?= base_url('admin/categorias') ?>" class="btn btn-admin-secondary w-100">
+                                    <i class="fas fa-tags me-2"></i>Ver Categorías
+                                </a>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                                <a href="<?= base_url('admin/pedidos') ?>" class="btn btn-admin-secondary w-100">
+                                    <i class="fas fa-clipboard-list me-2"></i>Ver Pedidos
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4 text-center">
-                    <i class="fas fa-chart-line" style="font-size: 8rem; color: var(--dorado); opacity: 0.3;"></i>
+                <div class="col-lg-4 col-md-12 text-center mt-lg-0 mt-4">
+                    <i class="fas fa-chart-line dashboard-icon"></i>
                 </div>
             </div>
         </div>

@@ -127,6 +127,7 @@ $routes->group('admin/api', ['filter' => 'admin'], function ($routes) {
     $routes->put('usuario/(:num)', 'Admin::actualizarUsuario/$1');
     $routes->post('usuario/(:num)', 'Admin::actualizarUsuario/$1'); // Fallback para PUT
     $routes->delete('usuario/(:num)', 'Admin::eliminarUsuario/$1');
+    $routes->post('usuario/baja/(:num)', 'Admin::cambiarEstadoBajaUsuario/$1');
     $routes->get('roles', 'Admin::getRoles');
 
     // APIs de productos

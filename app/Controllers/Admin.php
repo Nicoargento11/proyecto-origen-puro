@@ -96,6 +96,12 @@ class Admin extends BaseController
         return $this->usuariosController->getRoles();
     }
 
+    // API: Cambiar estado de baja/activo de un usuario
+    public function cambiarEstadoBajaUsuario($id)
+    {
+        return $this->usuariosController->cambiarEstadoBajaUsuario($id);
+    }
+
     // =============================================
     // PRODUCTOS - VISTAS
     // =============================================

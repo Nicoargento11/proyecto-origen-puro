@@ -82,6 +82,16 @@
         </div>
     <?php endif; ?>
 
+    <?php if (session('errors')): ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i>Por favor corrige los errores indicados abajo.<br>
+            <?php foreach (session('errors') as $campo => $mensaje): ?>
+                <strong><?= esc($campo) ?>:</strong> <?= esc($mensaje) ?><br>
+            <?php endforeach; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    <?php endif; ?>
+
     <div class="row">
         <!-- Perfil Info -->
         <div class="col-md-4 mb-4">
@@ -119,26 +129,91 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="nombre" class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre"
-                                    value="<?= $user['nombre'] ?>" required>
+                                <input type="text" class="form-control<?= session('errors.nombre') ? ' is-invalid' : '' ?>" id="nombre" name="nombre"
+                                    value="<?= old('nombre', $user['nombre']) ?>" required>
+                                <?php if (session('errors.nombre')): ?>
+                                    <div class="invalid-feedback">
+                                        <?= esc(session('errors.nombre')) ?>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="apellido" class="form-label">Apellido</label>
-                                <input type="text" class="form-control" id="apellido" name="apellido"
-                                    value="<?= $user['apellido'] ?>" required>
+                                <input type="text" class="form-control<?= session('errors.apellido') ? ' is-invalid' : '' ?>" id="apellido" name="apellido"
+                                    value="<?= old('apellido', $user['apellido']) ?>" required>
+                                <?php if (session('errors.apellido')): ?>
+                                    <div class="invalid-feedback">
+                                        <?= esc(session('errors.apellido')) ?>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email"
-                                value="<?= $user['email'] ?>" required>
+                            <input type="email" class="form-control<?= session('errors.email') ? ' is-invalid' : '' ?>" id="email" name="email"
+                                value="<?= old('email', $user['email']) ?>" required>
+                            <?php if (session('errors.email')): ?>
+                                <div class="invalid-feedback">
+                                    <?= esc(session('errors.email')) ?>
+                                </div>
+                            <?php endif; ?>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="usuario" class="form-label">Usuario</label>
-                            <input type="text" class="form-control" id="usuario" name="usuario"
-                                value="<?= $user['usuario'] ?? $user['email'] ?>" required>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="telefono" class="form-label">Teléfono</label>
+                                <input type="text" class="form-control<?= session('errors.telefono') ? ' is-invalid' : '' ?>" id="telefono" name="telefono"
+                                    value="<?= old('telefono', $user['telefono'] ?? '') ?>">
+                                <?php if (session('errors.telefono')): ?>
+                                    <div class="invalid-feedback">
+                                        <?= esc(session('errors.telefono')) ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="ciudad" class="form-label">Ciudad</label>
+                                <input type="text" class="form-control<?= session('errors.ciudad') ? ' is-invalid' : '' ?>" id="ciudad" name="ciudad"
+                                    value="<?= old('ciudad', $user['ciudad'] ?? '') ?>">
+                                <?php if (session('errors.ciudad')): ?>
+                                    <div class="invalid-feedback">
+                                        <?= esc(session('errors.ciudad')) ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="direccion" class="form-label">Dirección</label>
+                                <input type="text" class="form-control<?= session('errors.direccion') ? ' is-invalid' : '' ?>" id="direccion" name="direccion"
+                                    value="<?= old('direccion', $user['direccion'] ?? '') ?>">
+                                <?php if (session('errors.direccion')): ?>
+                                    <div class="invalid-feedback">
+                                        <?= esc(session('errors.direccion')) ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="codigo_postal" class="form-label">Código Postal</label>
+                                <input type="text" class="form-control<?= session('errors.codigo_postal') ? ' is-invalid' : '' ?>" id="codigo_postal" name="codigo_postal"
+                                    value="<?= old('codigo_postal', $user['codigo_postal'] ?? '') ?>">
+                                <?php if (session('errors.codigo_postal')): ?>
+                                    <div class="invalid-feedback">
+                                        <?= esc(session('errors.codigo_postal')) ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="pais" class="form-label">País</label>
+                                <input type="text" class="form-control<?= session('errors.pais') ? ' is-invalid' : '' ?>" id="pais" name="pais"
+                                    value="<?= old('pais', $user['pais'] ?? '') ?>">
+                                <?php if (session('errors.pais')): ?>
+                                    <div class="invalid-feedback">
+                                        <?= esc(session('errors.pais')) ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
                         </div>
 
                         <hr>
@@ -147,18 +222,33 @@
 
                         <div class="mb-3">
                             <label for="current_password" class="form-label">Contraseña Actual</label>
-                            <input type="password" class="form-control" id="current_password" name="current_password">
+                            <input type="password" class="form-control<?= session('errors.current_password') ? ' is-invalid' : '' ?>" id="current_password" name="current_password">
                             <small class="form-text text-muted">Déjalo vacío si no quieres cambiar la contraseña</small>
+                            <?php if (session('errors.current_password')): ?>
+                                <div class="invalid-feedback">
+                                    <?= esc(session('errors.current_password')) ?>
+                                </div>
+                            <?php endif; ?>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="new_password" class="form-label">Nueva Contraseña</label>
-                                <input type="password" class="form-control" id="new_password" name="new_password" min="6">
+                                <input type="password" class="form-control<?= session('errors.new_password') ? ' is-invalid' : '' ?>" id="new_password" name="new_password" min="6">
+                                <?php if (session('errors.new_password')): ?>
+                                    <div class="invalid-feedback">
+                                        <?= esc(session('errors.new_password')) ?>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="confirm_password" class="form-label">Confirmar Nueva Contraseña</label>
-                                <input type="password" class="form-control" id="confirm_password" name="confirm_password">
+                                <input type="password" class="form-control<?= session('errors.confirm_password') ? ' is-invalid' : '' ?>" id="confirm_password" name="confirm_password">
+                                <?php if (session('errors.confirm_password')): ?>
+                                    <div class="invalid-feedback">
+                                        <?= esc(session('errors.confirm_password')) ?>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
 

@@ -114,6 +114,57 @@
     transform: translate(-50%, -50%);
     width: 100%;
   }
+
+  /* Responsive grid para productos destacados en principal */
+  @media (min-width: 576px) {
+    .row.productos-grid>[class^="col-"] {
+      flex: 0 0 auto;
+      width: 50%;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .row.productos-grid>[class^="col-"] {
+      width: 25%;
+    }
+  }
+
+  @media (max-width: 575.98px) {
+    .row.productos-grid>[class^="col-"] {
+      width: 100%;
+    }
+  }
+
+  /* Scroll horizontal para productos destacados en principal */
+  .productos-scroll {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 1.5rem;
+    padding-bottom: 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: #D4A762 #E6D5C3;
+  }
+
+  .productos-scroll>.col-md-6,
+  .productos-scroll>.col-lg-3 {
+    flex: 0 0 260px;
+    max-width: 260px;
+    min-width: 220px;
+  }
+
+  .productos-scroll::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .productos-scroll::-webkit-scrollbar-thumb {
+    background: #D4A762;
+    border-radius: 4px;
+  }
+
+  .productos-scroll::-webkit-scrollbar-track {
+    background: #E6D5C3;
+  }
 </style>
 
 
@@ -165,7 +216,7 @@
       <h2 class="display-4 fw-bold mb-3" style="color: #E6D5C3;">Nuestra Selección</h2>
       <p class="lead mx-auto" style="color: #D4A762; max-width: 600px;">Descubre perfiles únicos de nuestras fincas asociadas</p>
     </div>
-    <div class="row g-4">
+    <div class="row g-4 productos-scroll">
       <?php if (!empty($productos_destacados)): ?>
         <?php foreach ($productos_destacados as $producto): ?>
           <div class="col-md-6 col-lg-3">
@@ -237,39 +288,6 @@
     </div>
   </div>
 </section>
-
-<!-- Sección Experiencia - Actualizada -->
-<!-- <section id="experiencia" class="py-6" style="background: linear-gradient(to left, #F5F0E6, #E6D5C3); padding: 10vh">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-lg-6 order-lg-2 mb-5 mb-lg-0">        <div class="position-relative">
-          <img src="<?= base_url('assets/img/experiencia-cafe.jpg') ?>" alt="Experiencia café" class="img-fluid rounded-4 shadow" loading="lazy" style="border: 8px solid white; box-shadow: 0 10px 30px rgba(74, 46, 29, 0.2);">
-          <div class="position-absolute top-0 start-0 w-100 h-100" style="background: rgba(212, 167, 98, 0.1); border-radius: 16px; z-index: 0;"></div>
-        </div>
-      </div>
-      <div class="col-lg-6 order-lg-1">
-        <h2 class="display-4 fw-bold mb-4" style="color: #4A2E1D;">Más que Café, una Cultura</h2>
-        <div class="d-flex mb-4">
-          <div class="me-4" style="color: #D4A762;">
-            <i class="fas fa-coffee fs-1"></i>
-          </div>
-          <div>
-            <h3 class="h4" style="color: #4A2E1D;">Cataciones Mensuales</h3>
-            <p style="color: #6F4E37;">Aprende a distinguir sabores como un profesional.</p>
-          </div>
-        </div>
-        <div class="d-flex mb-4">
-          <div class="me-4" style="color: #D4A762;">
-            <i class="fas fa-book fs-1"></i>
-          </div>
-          <div>
-            <h3 class="h4" style="color: #4A2E1D;">Biblioteca Cafetera</h3>
-            <p style="color: #6F4E37;">Material educativo sobre métodos de preparación.</p>
-          </div>
-        </div>
-        <!-- <a href="<?= base_url('eventos') ?>" class="btn btn-lg px-4" style="background-color: #4A2E1D; color: #E6D5C3;">
-          Ver Eventos
-        </a> -->
 </div>
 </div>
 </div>
@@ -377,9 +395,9 @@
 
             } else {
               // Mostrar error
-              alert(data.message || 'Error al agregar el producto al carrito');
-              this.innerHTML = originalText;
-              this.disabled = false;
+              // alert(data.message || 'Error al agregar el producto al carrito');
+              // this.innerHTML = originalText;
+              // this.disabled = false;
 
               // Si necesita login, redirigir
               if (data.redirect) {

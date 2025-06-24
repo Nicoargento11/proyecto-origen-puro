@@ -118,7 +118,7 @@
                             <div class="row align-items-center">
                                 <div class="col-md-2">
                                     <?php if (!empty($item['imagen_producto'])): ?>
-                                        <img src="<?= base_url($item['imagen_producto']) ?>"
+                                        <img src="<?= base_url("public/uploads/productos/" . $item['imagen_producto']) ?>"
                                             alt="<?= esc($item['producto_nombre']) ?>"
                                             class="producto-imagen">
                                     <?php else: ?>

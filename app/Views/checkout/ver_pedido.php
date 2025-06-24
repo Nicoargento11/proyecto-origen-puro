@@ -210,8 +210,8 @@
                                     <tr>
                                         <td>
                                             <div class="d-flex align-items-center"> <?php if (!empty($item['imagen_producto'])): ?>
-                                                    <img src="<?= base_url('uploads/' . $item['imagen_producto']) ?>"
-                                                        alt="<?= esc($item['nombre']) ?>"
+                                                    <img src="<?= base_url('public/uploads/productos/' . $item['imagen_producto']) ?>"
+                                                        alt="<?= esc($item['nombre_producto']) ?>"
                                                         class="rounded me-3"
                                                         style="width: 60px; height: 60px; object-fit: cover;">
                                                 <?php else: ?>

@@ -155,9 +155,9 @@
                 </div>
                 <div class="col-md-6 text-end">
                     <div class="btn-group">
-                        <a href="<?= base_url('admin/pedidos/editar/' . ($pedido['id'] ?? '')) ?>" class="btn btn-admin-primary">
+                        <!-- <a href="<?= base_url('admin/pedidos/editar/' . ($pedido['id'] ?? '')) ?>" class="btn btn-admin-primary">
                             <i class="fas fa-edit me-2"></i>Editar Pedido
-                        </a>
+                        </a> -->
                         <a href="<?= base_url('admin/pedidos') ?>" class="btn btn-outline-secondary">
                             <i class="fas fa-arrow-left me-2"></i>Volver a Pedidos
                         </a>
@@ -297,7 +297,7 @@
                             <div class="row align-items-center">
                                 <div class="col-md-2">
                                     ${item.imagen_producto ? 
-                                        `<img src="<?= base_url() ?>${item.imagen_producto}" alt="${item.nombre_producto}" class="product-image">` :
+                                        `<img src="<?= base_url("public/uploads/productos/") ?>${item.imagen_producto}" alt="${item.nombre_producto}" class="product-image">` :
                                         '<div class="product-image bg-light d-flex align-items-center justify-content-center"><i class="fas fa-box text-muted"></i></div>'
                                     }
                                 </div>

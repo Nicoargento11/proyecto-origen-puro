@@ -197,9 +197,6 @@
                                     <a href="<?= base_url('admin/productos/editar') ?>/${producto.id}" class="btn btn-sm btn-outline-primary" title="Editar">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <button class="btn btn-sm btn-outline-danger" onclick="deleteProduct(${producto.id})" title="Eliminar">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
                                 </div>
                             </td>
                         </tr>

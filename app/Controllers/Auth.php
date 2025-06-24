@@ -87,6 +87,8 @@ class Auth extends BaseController
     // Procesar el login
     public function procesarLogin()
     {
+
+
         $rules = [
             'email' => 'required|valid_email',
             'password' => 'required|min_length[6]'
@@ -102,16 +104,17 @@ class Auth extends BaseController
             $email = $this->request->getPost('email');
             $password = $this->request->getPost('password');
 
-            $user = $model->where('email', $email)->first();
+            // USAR VALIDACIÓN DEL MODELO PARA IMPEDIR LOGIN DE USUARIOS DADOS DE BAJA
+            $user = $model->validateLogin($email, $password);
 
             if (!$user) {
-                return redirect()->back()
-                    ->withInput()
-                    ->with('error', 'Email o contraseña incorrectos');
-            }
-
-            // Verificar contraseña
-            if (!password_verify($password, $user['password'])) {
+                // Verificar si el usuario existe pero está dado de baja
+                $userCheck = $model->where('email', $email)->first();
+                if ($userCheck && isset($userCheck['baja']) && $userCheck['baja'] === 'SI') {
+                    return redirect()->back()
+                        ->withInput()
+                        ->with('error', 'Tu usuario ha sido dado de baja. Si creés que es un error, contactá al administrador.');
+                }
                 return redirect()->back()
                     ->withInput()
                     ->with('error', 'Email o contraseña incorrectos');
@@ -295,7 +298,6 @@ class Auth extends BaseController
             'nombre' => 'required|min_length[2]|max_length[30]',
             'apellido' => 'required|min_length[2]|max_length[30]',
             'email' => 'required|valid_email|max_length[50]',
-            'usuario' => 'required|min_length[3]|max_length[20]'
         ];
 
         // Si se proporciona nueva contraseña, agregar validaciones

@@ -184,9 +184,7 @@
                                     <a href="<?= base_url('admin/pedidos/ver') ?>/${pedido.id}" class="btn btn-sm btn-outline-info" title="Ver">
                                         <i class="fas fa-eye"></i>
                                     </a>
-                                    <button class="btn btn-sm btn-outline-danger" onclick="deletePedido(${pedido.id})" title="Eliminar">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+
                                 </div>
                             </td>
                         </tr>

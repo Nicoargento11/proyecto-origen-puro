@@ -72,16 +72,24 @@ class Carrito extends BaseController
                 ]);
             }
 
-            // Verificar stock
-            if (!$this->productoModel->tieneStock($productoId, $cantidad)) {
-                return $this->response->setJSON([
-                    'success' => false,
-                    'message' => 'Stock insuficiente. Disponible: ' . $producto['stock'] . ' kg'
-                ]);
-            }
-
             $usuarioId = session()->get('id');
             $carrito = $this->carritoModel->obtenerCarritoUsuario($usuarioId);
+
+            // Obtener cantidad actual en el carrito
+            $itemExistente = $this->itemCarritoModel
+                ->where('carrito_id', $carrito['id'])
+                ->where('producto_id', $productoId)
+                ->first();
+            $cantidadEnCarrito = $itemExistente ? (int)$itemExistente['cantidad'] : 0;
+            $cantidadTotal = $cantidadEnCarrito + $cantidad;
+
+            // Verificar stock considerando lo que ya hay en el carrito
+            if ($cantidadTotal > $producto['stock']) {
+                return $this->response->setJSON([
+                    'success' => false,
+                    'message' => 'No puedes agregar más de ' . $producto['stock'] . ' unidades de este producto. Ya tienes ' . $cantidadEnCarrito . ' en tu carrito.'
+                ]);
+            }
 
             // Agregar al carrito
             $resultado = $this->itemCarritoModel->agregarProducto(

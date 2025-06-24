@@ -409,11 +409,13 @@
 
         function updateCartCount(count) {
             // Buscar elemento del contador del carrito en la navbar
-            const cartCountElement = document.getElementById('cart-count');
+            const cartCountElement = document.querySelector('.carrito-contador');
             if (cartCountElement) {
                 cartCountElement.textContent = count;
                 if (count > 0) {
                     cartCountElement.style.display = 'inline';
+                } else {
+                    cartCountElement.style.display = 'none';
                 }
             }
         }

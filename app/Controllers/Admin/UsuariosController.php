@@ -292,4 +292,37 @@ class UsuariosController extends BaseController
             return $this->handleException($e, 'Error al obtener roles');
         }
     }
+    // Cambiar estado de baja/activo de un usuario (AJAX)
+    public function cambiarEstadoBajaUsuario($id)
+    {
+        $ajaxValidation = $this->validateAjaxRequest();
+        if ($ajaxValidation) return $ajaxValidation;
+
+        try {
+            $usuario = $this->usuarioModel->find($id);
+            if (!$usuario) {
+                return $this->sendJsonResponse(false, 'Usuario no encontrado');
+            }
+
+            $request = service('request');
+            $input = $request->getBody();
+            $requestData = json_decode($input, true);
+            if (!$requestData) {
+                $requestData = $request->getPost();
+            }
+            $nuevoEstado = isset($requestData['baja']) && $requestData['baja'] === 'SI' ? 'SI' : 'NO';
+
+            // No permitir darse de baja a sí mismo
+            $session = session();
+            if ($id == $session->get('id')) {
+                return $this->sendJsonResponse(false, 'No puedes darte de baja a ti mismo');
+            }
+
+            $this->usuarioModel->update($id, ['baja' => $nuevoEstado]);
+            $mensaje = $nuevoEstado === 'SI' ? 'Usuario dado de baja correctamente' : 'Usuario reactivado correctamente';
+            return $this->sendJsonResponse(true, $mensaje);
+        } catch (\Exception $e) {
+            return $this->handleException($e, 'Error al cambiar el estado del usuario');
+        }
+    }
 }

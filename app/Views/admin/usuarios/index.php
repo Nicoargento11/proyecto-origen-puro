@@ -117,6 +117,7 @@
                                 <th>Email</th>
                                 <th>Roles</th>
                                 <th>Fecha Registro</th>
+                                <th>Activo</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -166,14 +167,17 @@
                                 ${usuario.roles ? usuario.roles.map(rol => `<span class="badge bg-primary me-1">${rol.nombre}</span>`).join('') : '<span class="badge bg-secondary">Usuario</span>'}
                             </td>
                             <td>${new Date(usuario.fecha_registro).toLocaleDateString()}</td>
-                           <td>
+                            <td>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input usuario-activo-switch" type="checkbox" id="switch-activo-${usuario.id}" data-usuario-id="${usuario.id}" ${usuario.baja === 'NO' ? 'checked' : ''}>
+                                    <label class="form-check-label" for="switch-activo-${usuario.id}">${usuario.baja === 'NO' ? 'Activo' : 'Baja'}</label>
+                                </div>
+                            </td>
+                            <td>
                                 <div class="btn-group">
-                                    <a href="<?= base_url('admin/usuarios/editar') ?>/${usuario.id}" class="btn btn-sm btn-outline-primary" title="Editar">
-                                        <i class="fas fa-edit"></i>
+                                    <a href=\"<?= base_url('admin/usuarios/editar') ?>/${usuario.id}\" class=\"btn btn-sm btn-outline-primary\" title=\"Editar\">
+                                        <i class=\"fas fa-edit\"></i>
                                     </a>
-                                    <button class="btn btn-sm btn-outline-danger" onclick="deleteUser(${usuario.id})" title="Eliminar">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
                                 </div>
                             </td>
                         </tr>
@@ -190,31 +194,35 @@
             });
     }
 
-    // Eliminar usuario
-    function deleteUser(id) {
-        if (confirm('¿Estás seguro de que quieres eliminar este usuario? Esta acción no se puede deshacer.')) {
-            fetch(`<?= base_url('admin/api/usuario') ?>/${id}`, {
-                    method: 'DELETE',
+    // Cambiar estado de baja/activo
+    document.addEventListener('change', function(e) {
+        if (e.target.classList.contains('usuario-activo-switch')) {
+            const usuarioId = e.target.dataset.usuarioId;
+            const nuevoEstado = e.target.checked ? 'NO' : 'SI';
+            fetch(`<?= base_url('admin/api/usuario/baja') ?>/${usuarioId}`, {
+                    method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'X-Requested-With': 'XMLHttpRequest'
-                    }
+                    },
+                    body: JSON.stringify({
+                        baja: nuevoEstado
+                    })
                 })
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
                         showAlert('success', data.message);
-                        loadUsuarios(); // Recargar tabla
+                        loadUsuarios();
                     } else {
                         showAlert('error', data.message);
                     }
                 })
                 .catch(error => {
-                    console.error('Error:', error);
-                    showAlert('error', 'Error al eliminar usuario');
+                    showAlert('error', 'Error al actualizar el estado del usuario');
                 });
         }
-    }
+    });
 
     // Mostrar alertas
     function showAlert(type, message) {

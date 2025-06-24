@@ -317,7 +317,7 @@
             <button onclick="window.print()" class="btn btn-factura">
                 <i class="fas fa-print me-2"></i>Imprimir Factura
             </button>
-            <a href="<?= base_url('usuario/mis-pedidos') ?>" class="btn btn-outline-secondary">
+            <a href="<?= base_url('mis-pedidos') ?>" class="btn btn-outline-secondary">
                 <i class="fas fa-history me-2"></i>Ver Mis Pedidos
             </a>
             <a href="<?= base_url('/') ?>" class="btn btn-outline-primary">

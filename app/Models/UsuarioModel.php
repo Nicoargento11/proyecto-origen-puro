@@ -8,7 +8,7 @@ class UsuarioModel extends Model
 {
     protected $table = 'usuarios';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['nombre', 'apellido', 'email', 'password', 'telefono', 'direccion', 'ciudad', 'codigo_postal', 'pais'];
+    protected $allowedFields = ['nombre', 'apellido', 'email', 'password', 'telefono', 'direccion', 'ciudad', 'codigo_postal', 'pais', 'baja'];
 
     // Configuraciones del modelo
     protected $returnType = 'array';
@@ -18,8 +18,8 @@ class UsuarioModel extends Model
     protected $useTimestamps = false;
 
     // Hash automático deshabilitado - lo manejamos manualmente en el controlador
-    // protected $beforeInsert = ['hashPassword'];
-    // protected $beforeUpdate = ['hashPassword'];
+    protected $beforeInsert = ['hashPassword'];
+    protected $beforeUpdate = ['hashPassword'];
 
     protected function hashPassword(array $data)
     {
@@ -32,7 +32,9 @@ class UsuarioModel extends Model
     // Validar credenciales de login
     public function validateLogin($email, $password)
     {
-        $user = $this->where('email', $email)->first();
+        $user = $this->where('email', $email)
+            ->where('baja', 'NO')
+            ->first();
 
         if (!$user) {
             return false;
@@ -56,7 +58,7 @@ class UsuarioModel extends Model
     }    // Obtener usuario con sus roles
     public function getUsuarioConRoles($userId)
     {
-        $usuario = $this->find($userId);
+        $usuario = $this->where('id', $userId)->where('baja', 'NO')->first();
         if (!$usuario) {
             return null;
         }

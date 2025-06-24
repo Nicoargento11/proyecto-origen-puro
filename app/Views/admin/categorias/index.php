@@ -235,11 +235,7 @@
                        title="Editar">
                         <i class="fas fa-edit"></i>
                     </a>
-                    <button class="btn btn-icon btn-delete" 
-                            onclick="eliminarCategoria(${categoria.id}, '${categoria.nombre}')"
-                            title="Eliminar">
-                        <i class="fas fa-trash"></i>
-                    </button>
+
                 </td>
             </tr>        `).join('');
     } // Toggle estado de la categoría

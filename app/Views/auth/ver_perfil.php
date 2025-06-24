@@ -192,9 +192,7 @@
                         </div>
                     </div> <!-- Botones de acción -->
                     <div class="text-center mt-4">
-                        <a href="<?= base_url('perfil/dashboard') ?>" class="btn btn-custom me-3">
-                            <i class="fas fa-tachometer-alt me-2"></i>Mi Dashboard
-                        </a>
+
                         <a href="<?= base_url('perfil/editar') ?>" class="btn btn-outline-secondary me-3">
                             <i class="fas fa-edit me-2"></i>Editar Perfil
                         </a>
